@@ -1,0 +1,142 @@
+{
+    "name": "Media",
+    "tables": [
+        {
+            "name": "Sizes",
+            "isEnum": true,
+            "enumItems": [
+                {
+                    "key": "Xs",
+                    "value": 1
+                },
+                {
+                    "key": "Sm",
+                    "value": 2
+                },
+                {
+                    "key": "Md",
+                    "value": 3
+                },
+                {
+                    "key": "Lg",
+                    "value": 4
+                },
+                {
+                    "key": "Xl",
+                    "value": 5
+                },
+                {
+                    "key": "Xxl",
+                    "value": 6
+                }
+            ]
+        },
+        {
+            "name": "Images",
+            "columns": [
+                {
+                    "name": "EntityTypeGuid"
+                },
+                {
+                    "name": "EntityGuid"
+                },
+                {
+                    "name": "ImageGuid"
+                }
+            ]
+        },
+        {
+            "name": "Thumbnails",
+            "columns": [
+                {
+                    "name": "ImageId"
+                },
+                {
+                    "name": "SizeId"
+                },
+                {
+                    "name": "ThumbnailGuid"
+                }
+            ],
+            "indexes": [
+                {
+                    "columns": [
+                        "ImageId",
+                        "SizeId"
+                    ],
+                    "isUnique": true
+                }
+            ]
+        },
+        {
+            "name": "Videos",
+            "columns": [
+                {
+                    "name": "EntityTypeGuid"
+                },
+                {
+                    "name": "EntityType"
+                },
+                {
+                    "name": "CoverImage",
+                    "isNullable": true
+                },
+                {
+                    "name": "VideoGuid",
+                    "isNullable": true
+                },
+                {
+                    "name": "EmbedCode",
+                    "isNullable": true
+                },
+                {
+                    "name": "Url",
+                    "isNullable": true
+                }
+            ],
+            "checks": [
+                {
+                    "name": "VideoGuidOrEmbedCodeOrUrlIsProvided",
+                    "query": "VideoGuid is not null or EmbedCode is not null or Url is not null"
+                }
+            ]
+        },
+        {
+            "name": "Audios",
+            "columns": [
+                {
+                    "name": "EntityTypeGuid"
+                },
+                {
+                    "name": "EntityGuid"
+                },
+                {
+                    "name": "AudioGuid"
+                }
+            ]
+        },
+        {
+            "name": "VirtualTours",
+            "columns": [
+                {
+                    "name": "EntityTypeGuid"
+                },
+                {
+                    "name": "EntityGuid"
+                },
+                {
+                    "name": "Link"
+                }
+            ]
+        }
+    ],
+    "views": [
+        {
+            "name": "ImageViews",
+            "query": [
+                "select *",
+                "from Images"
+            ]
+        }
+    ]
+}
