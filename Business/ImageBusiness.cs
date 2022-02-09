@@ -10,4 +10,15 @@ public class ImageBusiness : Business<ImageView, Image>
     {
         base.ModifyItemBeforeReturning(image);
     }
+
+    public ImageView Upload(string entityType, Guid entityGuid, byte[] bytes)
+    {
+        var image = new Image();
+        image.EntityTypeGuid = new EntityTypeBusiness().GetGuid(entityType);
+        image.EntityGuid = entityGuid;
+        image.ImageGuid = Guid.NewGuid();
+        Storage.UploadImage(bytes, image.ImageGuid, entityType.ToLower() + "images");
+        Create(image);
+        return Get(image.Id);
+    }
 }
