@@ -34,6 +34,14 @@ public class Repository
         }
     }
 
+    public static Repository<Media.ThumbnailView> ThumbnailView
+    {
+        get
+        {
+            return new Repository<Media.ThumbnailView>(new MediaContext());
+        }
+    }
+
     public static Repository<Media.Video> Video
     {
         get

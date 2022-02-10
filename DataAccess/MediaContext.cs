@@ -12,6 +12,8 @@ public class MediaContext : DatabaseContext
 
     public DbSet<Media.Thumbnail> Thumbnails { get; set; }
 
+    public DbSet<Media.ThumbnailView> ThumbnailViews { get; set; }
+
     public DbSet<Media.Video> Videos { get; set; }
 
     public DbSet<Media.VirtualTour> VirtualTours { get; set; }

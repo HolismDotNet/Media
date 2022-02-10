@@ -132,10 +132,29 @@
     ],
     "views": [
         {
+            "name": "ThumbnailViews",
+            "query": [
+                "select",
+                "    t.*,",
+                "    s.`Key` as SizeKey",
+                "from Thumbnails t",
+                "inner join Sizes s",
+                "on t.SizeId = s.Id"
+            ]
+        },
+        {
             "name": "ImageViews",
             "query": [
-                "select *",
-                "from Images"
+                "select",
+                "    i.*,",
+                "    (",
+                "        select ThumbnailGuid",
+                "        from ThumbnailViews t",
+                "        where t.ImageId = i.Id",
+                "        order by SizeId",
+                "        limit 1",
+                "    ) as SmallestThumbnailGuid",
+                "from Images i"
             ]
         }
     ]

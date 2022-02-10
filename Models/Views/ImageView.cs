@@ -15,5 +15,7 @@ public class ImageView : IEntity
 
     public Guid ImageGuid { get; set; }
 
+    public Guid? SmallestThumbnailGuid { get; set; }
+
     public dynamic RelatedItems { get; set; }
 }

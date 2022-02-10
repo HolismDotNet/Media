@@ -29,4 +29,21 @@ public class ImageBusiness : Business<ImageView, Image>
         Create(image);
         return Get(image.Id);
     }
+
+    public void Augment(List<IGuid> items)
+    {
+        var guids = items.Select(i => i.Guid).ToList();
+        var images = GetList(i => guids.Contains(i.EntityGuid));
+        var imageIds = images.Select(i => i.Id).ToList();
+        var thumbnails = new ThumbnailBusiness().GetThumbnails(imageIds);
+        foreach (var item in items)
+        {
+            var itemImages = images.Where(i => i.EntityGuid == item.Guid);
+            foreach (var itemImage in itemImages)
+            {
+                itemImage.RelatedItems.Thumbnails = thumbnails.Where(i => i.ImageId == itemImage.Id);
+            }
+            ((IEntity)item).RelatedItems.Images = itemImages;
+        }
+    }
 }
