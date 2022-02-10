@@ -6,15 +6,30 @@ public class ImageController : Controller<ImageView, Image>
     
     public override Business<ImageView, Image> Business => new ImageBusiness();
 
-    [BindProperty]
+    [BindProperty(SupportsGet = true)]
     public string EntityType { get; set; }
 
-    [BindProperty]
+    [BindProperty(SupportsGet = true)]
     public Guid? EntityGuid { get; set; }
+
+    public override Action<ListParameters> ListParametersAugmenter => listParameters => 
+    {
+        EnsureParametersExist();
+        listParameters.AddFilter<ImageView>(i => i.EntityGuid, EntityGuid);
+        listParameters.PageSize = 20;
+    };
 
     [FileUploadChecker]
     [HttpPost]
     public virtual object Upload(IFormFile file)
+    {
+        EnsureParametersExist();
+        var bytes = file.OpenReadStream().GetBytes();
+        var image = new Media.ImageBusiness().Upload(EntityType, EntityGuid.Value, bytes);
+        return image;
+    }
+
+    public void EnsureParametersExist()
     {
         if (EntityType.IsNothing())
         {
@@ -24,8 +39,5 @@ public class ImageController : Controller<ImageView, Image>
         {
             throw new ClientException("Please provide entityGuid");
         }
-        var bytes = file.OpenReadStream().GetBytes();
-        var image = new Media.ImageBusiness().Upload(EntityType, EntityGuid.Value, bytes);
-        return image;
     }
 }
