@@ -8,7 +8,7 @@ public class ImageBusiness : Business<ImageView, Image>
 
     public string GetContainerName(string entityType)
     {
-        return $"{entityType.ToLower()}images";
+        return $"{entityType.ToLower()}";
     }
 
     protected override void ModifyItemBeforeReturning(ImageView image)
