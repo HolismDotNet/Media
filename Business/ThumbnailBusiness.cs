@@ -2,9 +2,9 @@ namespace Media;
 
 public class ThumbnailBusiness : Business<ThumbnailView, Thumbnail>
 {
-    protected override ReadRepository<ThumbnailView> ReadRepository => Repository.ThumbnailView;
+    protected override Read<ThumbnailView> Read => Repository.ThumbnailView;
 
-    protected override Repository<Thumbnail> WriteRepository => Repository.Thumbnail;
+    protected override Write<Thumbnail> Write => Repository.Thumbnail;
 
     public List<ThumbnailView> GetThumbnails(List<long> imageIds)
     {

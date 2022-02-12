@@ -2,9 +2,9 @@ namespace Media;
 
 public class ImageBusiness : Business<ImageView, Image>
 {
-    protected override ReadRepository<ImageView> ReadRepository => Repository.ImageView;
+    protected override Read<ImageView> Read => Repository.ImageView;
 
-    protected override Repository<Image> WriteRepository => Repository.Image;
+    protected override Write<Image> Write => Repository.Image;
 
     public string GetContainerName(string entityType)
     {
