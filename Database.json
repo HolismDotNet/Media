@@ -64,7 +64,7 @@
                         "ImageId",
                         "SizeId"
                     ],
-                    "isUnique": true
+                    "unique": true
                 }
             ]
         },
