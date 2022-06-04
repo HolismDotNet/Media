@@ -79,19 +79,19 @@
                 },
                 {
                     "name": "CoverImage",
-                    "isNullable": true
+                    "nullable": true
                 },
                 {
                     "name": "VideoGuid",
-                    "isNullable": true
+                    "nullable": true
                 },
                 {
                     "name": "EmbedCode",
-                    "isNullable": true
+                    "nullable": true
                 },
                 {
                     "name": "Url",
-                    "isNullable": true
+                    "nullable": true
                 }
             ],
             "checks": [
